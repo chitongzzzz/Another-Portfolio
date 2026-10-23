@@ -275,7 +275,17 @@ function closeResumeModal() {
   resumePreviewOpen.focus();
 }
 
-resumePreviewOpen.addEventListener('click', openResumeModal);
+resumePreviewOpen.addEventListener('click', event => {
+  if (compact.matches) return;
+
+  event.preventDefault();
+  openResumeModal();
+});
+compact.addEventListener('change', event => {
+  if (event.matches && resumeModal.classList.contains('is-active')) {
+    closeResumeModal();
+  }
+});
 resumeModalClose.addEventListener('click', closeResumeModal);
 resumeModal.addEventListener('click', event => {
   if (event.target === resumeModal) closeResumeModal();
