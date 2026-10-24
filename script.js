@@ -80,6 +80,25 @@ const projectData = [
   }
 ];
 
+/* Reveal page content as it enters the viewport. */
+const revealTargets = document.querySelectorAll(
+  '.home-copy, .portrait, .about .text-column, .section-heading, .project-view-toggle, .project-card, .contact-left, .contact-right'
+);
+
+if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  revealTargets.forEach(target => target.classList.add('scroll-reveal'));
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  revealTargets.forEach(target => revealObserver.observe(target));
+}
+
 /* Navigation & Header Logic */
 const menuButton=document.querySelector('.menu-toggle');
 const navigation=document.querySelector('.nav-links');

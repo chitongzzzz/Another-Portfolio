@@ -895,6 +895,25 @@ p {
   font-size: 13px;
 }
 
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms ease, transform 700ms ease, box-shadow 300ms ease, border-color 300ms ease;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.project-card.scroll-reveal:nth-child(2) {
+  transition-delay: 100ms;
+}
+
+.project-card.scroll-reveal:nth-child(3) {
+  transition-delay: 200ms;
+}
+
 @media(max-width:1199px) {
   :root {
     --header-height: 76px;
@@ -1079,6 +1098,11 @@ p {
 @media(prefers-reduced-motion:reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
